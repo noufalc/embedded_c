@@ -12,7 +12,7 @@ int send_data(unsigned int data)
 			output_data = 0;
 		else
 			output_data = 1;
-		printf("%d\t", output_data);
+		printf("%d ", output_data);
 	}
 	printf("\n");
 	return 0;
@@ -20,11 +20,20 @@ int send_data(unsigned int data)
 
 int main (int argc, char **argv)
 {
-	int i, a, b, c, n = 10;
+	int i, a, b, c, n = 10, scroll, shift_amount, display_buffer[8], temp;
 	system("clear");
 	for (i = 0; i < 8; i++)
+		display_buffer[i] = 0x0000;
+	for (scroll = 0; scroll < 8; scroll++)
 	{
-		send_data(charecterA[i]);
+		for (shift_amount = 0; shift_amount < 8; shift_amount++)
+		{
+			temp = charecterA[shift_amount];
+			display_buffer[shift_amount] = (display_buffer[shift_amount] << scroll) | (temp >> (8 - scroll));
+			send_data(display_buffer[shift_amount]);
+		}
+	system("sleep 1");
+	system("clear");
 	}
 	return 0;
 }
