@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#include <stdlib.h>
+unsigned short int charecterA[8] = {0x0e, 0x11, 0x11, 0x11, 0x1f, 0x11, 0x11, 0x11};
 
 int send_data(unsigned int data)
 {
@@ -17,10 +18,13 @@ int send_data(unsigned int data)
 	return 0;
 }
 
-
 int main (int argc, char **argv)
 {
-	unsigned int data = 0x7e;
-	send_data(data);
+	int i, a, b, c, n = 10;
+	system("clear");
+	for (i = 0; i < 8; i++)
+	{
+		send_data(charecterA[i]);
+	}
 	return 0;
 }
