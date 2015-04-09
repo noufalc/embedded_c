@@ -21,7 +21,8 @@ int send_data(unsigned int data)
 
 int main (int argc, char **argv)
 {
-	int i, a, b, c, n = 10, scroll, shift_amount, display_buffer[8], temp;
+	int i, a, b, c, n = 10;
+	unsigned short int temp, scroll, shift_amount, display_buffer[8];
 	system("clear");
 	for (i = 0; i < 8; i++)
 		display_buffer[i] = 0x0000;
@@ -31,7 +32,7 @@ int main (int argc, char **argv)
 		for (shift_amount = 0; shift_amount < 8; shift_amount++)
 		{
 			temp = charecterA[i][shift_amount];
-			display_buffer[shift_amount] = (display_buffer[shift_amount] << scroll) | (temp >> (8 - scroll));
+			display_buffer[shift_amount] = (display_buffer[shift_amount] << scroll) | (temp >> (8 - scroll -1));
 			send_data(display_buffer[shift_amount]);
 		}
 	system("sleep 1");
