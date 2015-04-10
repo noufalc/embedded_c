@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-unsigned char charecterA[][8] = {{0x0e, 0x11, 0x11, 0x11, 0x1f, 0x11, 0x11, 0x11}, {0x0e, 0x09, 0x09, 0x0e, 0x09, 0x09, 0x09, 0x0e}, {0x11, 0x19, 0x15, 0x13}};
+unsigned char charecterA[][8] = {{0x11,0x11,0x19,0x15,0x13,0x11,0x11,0x11},
+								{0x0E,0x11,0x11,0x11,0x11,0x11,0x11,0x0E},
+								{0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x0E}};
+
 
 int send_data(unsigned int data)
 {
@@ -27,7 +30,7 @@ int main (int argc, char **argv)
 	system("clear");
 	for (i = 0; i < 8; i++)
 		display_buffer[i] = 0x0000;
-	for (i = 0; i < 2; i++)
+	for (i = 0; i < 3; i++)
 	for (scroll = 4; scroll < 9; scroll++)
 	{
 		for (shift_amount = 0; shift_amount < 8; shift_amount++)
@@ -36,7 +39,7 @@ int main (int argc, char **argv)
 			display_buffer[shift_amount] = (display_buffer[shift_amount] << 1) | (temp >> (8 - scroll));
 			send_data(display_buffer[shift_amount]);
 		}
-	system("sleep 0.6");
+	system("sleep 0.2");
 	system("clear");
 	}
 	for (i = 0; i < 16; i++)
@@ -46,7 +49,7 @@ int main (int argc, char **argv)
 			display_buffer[shift_amount] = display_buffer[shift_amount] << 1;
 			send_data(display_buffer[shift_amount]);
 		}
-		system("sleep 0.6");
+		system("sleep 0.2");
 		system("clear");
 	}	
 	return 0;
